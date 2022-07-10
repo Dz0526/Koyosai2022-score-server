@@ -1,0 +1,26 @@
+version: '3'
+services:
+  fastapi:
+    build: .
+    volumes:
+      - .:/src
+    ports:
+      - 8000:8000
+    environment:
+      DB_NAME: score-server
+      DB_USER: fastapi
+      DB_PASSWORD: fastapi
+      DB_HOST: postgres
+      DB_PORT: 5433
+  postgres:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/postgresql/data
+    environment:
+      POSTGRES_USER: fastapi
+      POSTGRES_PASSWORD: fastapi
+      POSTGRES_DB: score-server
+    ports:
+      - 5433:5432
+volumes:
+  postgres_data:

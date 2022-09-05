@@ -8,7 +8,7 @@ from typing import List, Tuple, Optional
 from sqlalchemy import select
 from sqlalchemy.engine import Result
 
-async def create_user(
+async def create(
     db: AsyncSession, user_create: user_schema.User
 ) -> user_model.User:
     user = user_model.User(**user_create.dict())
@@ -17,7 +17,7 @@ async def create_user(
     db.refresh(user)
     return user
 
-async def get_users_with_done(db: AsyncSession) -> List[Tuple[int, str]]:
+async def gets(db: AsyncSession) -> List[Tuple[int, str]]:
     result: Result = (
         db.execute(
             select(
@@ -28,7 +28,7 @@ async def get_users_with_done(db: AsyncSession) -> List[Tuple[int, str]]:
     )
     return result.all()
 
-async def get_user(db: AsyncSession, user_id: int) -> Optional[user_model.User]:
+async def get(db: AsyncSession, user_id: int) -> Optional[user_model.User]:
     result: Result = db.execute(
         select(user_model.User).filter(user_model.User.id == user_id)
     )
@@ -36,7 +36,7 @@ async def get_user(db: AsyncSession, user_id: int) -> Optional[user_model.User]:
     return user[0] if user is not None else None  # 要素が一つであってもtupleで返却されるので１つ目の要素を取り出す
 
 
-async def update_user(
+async def update(
     db: AsyncSession, user_create: user_schema.UserCreate, original: user_model.User
 ) -> user_model.User:
     original.name = user_create.name
@@ -45,6 +45,6 @@ async def update_user(
     db.refresh(original)
     return original
 
-async def delete_user(db: AsyncSession, original: user_model.User) -> None:
+async def delete(db: AsyncSession, original: user_model.User) -> None:
     db.delete(original)
     db.commit()

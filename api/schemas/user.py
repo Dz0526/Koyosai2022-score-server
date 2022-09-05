@@ -1,9 +1,7 @@
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 class UserBase(BaseModel):
-    name: Optional[str] = Field(None, example="伊藤大輝")
+    name: str = Field(None, example="伊藤大輝")
 
 class UserCreate(UserBase):
     pass

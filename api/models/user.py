@@ -10,12 +10,3 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(1024), nullable=False)
-
-
-class Score(Base):
-    __tablename__ = "scores"
-
-    id = Column(Integer,primary_key=True)
-    rate = Column(Float, nullable=False)
-
-    user_id = Column(ForeignKey("users.id"), nullable=False)

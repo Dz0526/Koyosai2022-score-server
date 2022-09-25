@@ -23,21 +23,31 @@ async def simple_users(
 ):
     return await user_crud.get(db,user_id=user_id)
 
-@router.get("/users/{user_id}/scores")
-async def scores_user():
+
+
+@router.get("/users/{user_id}/scores",response_model=user_schema.User)
+async def user_scores():
     pass
 
-@router.get("/users/{user_id}/ranking")
+@router.get("/users/{user_id}/ranking",response_model=user_schema.User)
 async def list_ranking():
     pass
+
+
 
 @router.post("/users", response_model=user_schema.User)
 async def create(user_body: user_schema.UserCreate, db: AsyncSession = Depends(get_db)):
     return await user_crud.create(db, user_body)
 
-@router.post("/users/{user_id}/scores")
+
+
+
+@router.post("/users/{user_id}/scores",response_model=user_schema.User)
 async def add_score():
     pass
+
+
+
 
 @router.put("/users/{user_id}", response_model=user_schema.User)
 async def update(

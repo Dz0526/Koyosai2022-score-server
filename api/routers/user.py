@@ -15,17 +15,29 @@ router = APIRouter()
 async def list_users(db: AsyncSession = Depends(get_db)):
     return await user_crud.gets(db)
 
+
+
 @router.get("/users/{user_id}", response_model=user_schema.User)
 async def simple_users(
     user_id: int, db: AsyncSession = Depends(get_db)
 ):
     return await user_crud.get(db,user_id=user_id)
 
+@router.get("/users/{user_id}/scores")
+async def scores_user():
+    pass
+
+@router.get("/users/{user_id}/ranking")
+async def list_ranking():
+    pass
 
 @router.post("/users", response_model=user_schema.User)
 async def create(user_body: user_schema.UserCreate, db: AsyncSession = Depends(get_db)):
     return await user_crud.create(db, user_body)
 
+@router.post("/users/{user_id}/scores")
+async def add_score():
+    pass
 
 @router.put("/users/{user_id}", response_model=user_schema.User)
 async def update(
@@ -46,3 +58,4 @@ async def delete(user_id: int, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
     return await user_crud.delete(db, original=user)
+

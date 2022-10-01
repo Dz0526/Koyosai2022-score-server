@@ -15,6 +15,8 @@ router = APIRouter()
 async def list_users(db: AsyncSession = Depends(get_db)):
     return await user_crud.gets(db)
 
+
+
 @router.get("/users/{user_id}", response_model=user_schema.User)
 async def simple_users(
     user_id: int, db: AsyncSession = Depends(get_db)
@@ -25,6 +27,7 @@ async def simple_users(
 @router.post("/users", response_model=user_schema.User)
 async def create(user_body: user_schema.UserCreate, db: AsyncSession = Depends(get_db)):
     return await user_crud.create(db, user_body)
+
 
 
 @router.put("/users/{user_id}", response_model=user_schema.User)
@@ -46,3 +49,4 @@ async def delete(user_id: int, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
     return await user_crud.delete(db, original=user)
+

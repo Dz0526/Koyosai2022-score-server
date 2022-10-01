@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from api.routers import ranking, user,score
+from api.routers import  user,score,ranking
 
 app = FastAPI()
 

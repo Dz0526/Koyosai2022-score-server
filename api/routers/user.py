@@ -1,7 +1,9 @@
+from functools import cache
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import IntegrityError
 
 import api.cruds.user as user_crud
 from db.database import get_db
@@ -26,7 +28,10 @@ async def simple_users(
 
 @router.post("/users", response_model=user_schema.User)
 async def create(user_body: user_schema.UserCreate, db: AsyncSession = Depends(get_db)):
-    return await user_crud.create(db, user_body)
+    try:
+        return await user_crud.create(db, user_body)
+    except IntegrityError:
+        raise HTTPException(status_code=400, detail="User conflict")
 
 
 

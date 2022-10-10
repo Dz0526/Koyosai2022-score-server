@@ -113,7 +113,7 @@ async def get_rank_list(db:AsyncSession, user_id: int) -> Tuple[int, str,int]:
     logger.info(lower_around_rank_list)
     logger.info(rate_list_sorted)
 
-    logger.info(result)
+    #logger.info(result)
 
     
 

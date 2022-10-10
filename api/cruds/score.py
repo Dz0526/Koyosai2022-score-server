@@ -1,12 +1,13 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
+import api.models.user as user_model
 import api.models.score as score_model
 import api.schemas.score as score_schema
 
 from typing import List, Tuple, Optional
-from sqlalchemy import select
+from sqlalchemy import select,desc,func
 from sqlalchemy.engine import Result
-
+import logging
 
 async def get_user_score(db:AsyncSession, user_id: int) -> List[Tuple[int, int]]:
 

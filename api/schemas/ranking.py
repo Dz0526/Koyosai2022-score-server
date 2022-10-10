@@ -8,7 +8,7 @@ class RankingBase(BaseModel):
     rank: int
     
 class Ranking(BaseModel):
-    first: RankingBase
+    top_three: List[RankingBase]
     self: RankingBase
     higher_around_rank_users: List[RankingBase]
     lower_around_rank_users: List[RankingBase]

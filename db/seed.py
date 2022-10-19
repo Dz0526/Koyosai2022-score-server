@@ -120,14 +120,3 @@ def seed():
         db.commit()
     db.refresh(user)
     db.refresh(score)
-   
-    
-
-
-
-if __name__ == '__main__':
-    BOS = '\033[92m'  # 緑色表示用
-    EOS = '\033[0m'
-
-    print(f'{BOS}Seeding data...{EOS}')
-    seed()

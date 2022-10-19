@@ -7,10 +7,10 @@ import api.models.score as score_model
 db=local_session()
 
 def seed():
-    name_list=['田中ちゃん','村井','Test1','Test2','Test3','Test4','Test5','Test6','Test7','Test8']
+    name_list=['田中ちゃん','村井','Test1','Test2','Test3','Test4','Test5','Test6','Test7','Test8','Test9','Test10','Test11','Test12','Test13','Test14','Test15','Test16','Test17','Test18']
 
     #一人目
-    for i in range(10):
+    for i in range(20):
         user = user_model.User(name=name_list[i])
         db.add(user)
         db.commit()

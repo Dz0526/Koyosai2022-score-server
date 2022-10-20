@@ -16,7 +16,7 @@ services:
   postgres:
     image: postgres:12
     volumes:
-      - postgres_data:/var/lib/postgresql/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: fastapi
       POSTGRES_PASSWORD: fastapi

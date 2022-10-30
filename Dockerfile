@@ -15,5 +15,6 @@ ARG PGHOST
 ARG PGPASSWORD
 ARG PGPORT
 ARG PGUSER
+ENV PYTHONPATH=/src
 
 ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]

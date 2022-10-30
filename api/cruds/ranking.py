@@ -6,7 +6,7 @@ import api.models.user as user_model
 from typing import List, Tuple, Optional
 from sqlalchemy import desc, select,func
 from sqlalchemy.engine import Result
-import logging
+#import logging
 
 
 
@@ -60,7 +60,7 @@ async def get_rank_list(db:AsyncSession) -> List[Tuple[int,str,int]]:
 
 async def get_user_rank_list(db:AsyncSession, user_id: int) -> Tuple[int, str,int,int]:
 
-    logger = logging.getLogger('uvicorn')    
+    #logger = logging.getLogger('uvicorn')
     #一番高いレートを出す
     #ユーザー1人1人の最高値レートを一度出す
     return_rate_list=db.query(
@@ -144,14 +144,10 @@ async def get_user_rank_list(db:AsyncSession, user_id: int) -> Tuple[int, str,in
     #higher_around_rank_users
     #selfより上5件取得
     higher_around_rank_list=[]
-    if len(rate_list_sorted)<8:
-        higher_around_rank_list=rate_list_sorted[1:self_index]
-    elif self_index < 5:
+    if self_index < 5:
         higher_around_rank_list=rate_list_sorted[0:self_index]
     else:
         higher_around_rank_list=rate_list_sorted[self_index-5:self_index]
-    
-    logger.info(higher_around_rank_list)
     
 
     #resultに代入
@@ -187,5 +183,4 @@ async def get_user_rank_list(db:AsyncSession, user_id: int) -> Tuple[int, str,in
         }
         result["lower_around_rank_users"].append(dic_append)
 
-    logger.info(result)
     return result

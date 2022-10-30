@@ -2,8 +2,8 @@ version: '3'
 services:
   fastapi:
     build: .
-    volumes:
-      - .:/src
+    # volumes:
+    #   - .:/src
     ports:
       - 8000:8000
     environment:
@@ -12,7 +12,6 @@ services:
       DB_PASSWORD: fastapi
       DB_HOST: postgres
       DB_PORT: 5433
-      PYTHONPATH: /src
   postgres:
     image: postgres:12
     volumes:

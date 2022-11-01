@@ -144,9 +144,7 @@ async def get_user_rank_list(db:AsyncSession, user_id: int) -> Tuple[int, str,in
     #higher_around_rank_users
     #selfより上5件取得
     higher_around_rank_list=[]
-    if len(rate_list_sorted)<8:
-        higher_around_rank_list=rate_list_sorted[1:self_index]
-    elif self_index < 5:
+    if self_index < 5:
         higher_around_rank_list=rate_list_sorted[0:self_index]
     else:
         higher_around_rank_list=rate_list_sorted[self_index-5:self_index]

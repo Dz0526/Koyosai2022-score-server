@@ -2,8 +2,6 @@ version: '3'
 services:
   fastapi:
     build: .
-    volumes:
-      - .:/src
     ports:
       - 8000:8000
     environment:

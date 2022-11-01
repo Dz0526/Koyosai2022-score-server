@@ -35,6 +35,11 @@ async def get(db: AsyncSession, user_id: int) -> Optional[user_model.User]:
     user: Optional[Tuple[user_model.User]] = result.first()
     return user[0] if user is not None else None  # 要素が一つであってもtupleで返却されるので１つ目の要素を取り出す
 
+async def get_by_name(name: str, db: AsyncSession):
+    result: Result = db.execute(select(user_model.User).filter(user_model.User.name == name))
+
+    return result.first()[0]
+
 
 async def update(
     db: AsyncSession, user_create: user_schema.UserCreate, original: user_model.User

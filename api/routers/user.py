@@ -1,5 +1,5 @@
 from functools import cache
-from typing import List
+from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -13,8 +13,14 @@ import api.schemas.user as user_schema
 router = APIRouter()
 
 
-@router.get("/users", response_model=List[user_schema.User])
-async def list_users(db: AsyncSession = Depends(get_db)):
+@router.get("/users", response_model=Union[List[user_schema.User], user_schema.User])
+async def list_users(name: Union[str, None] = None, db: AsyncSession = Depends(get_db)):
+    if name:
+        try:
+            user = await user_crud.get_by_name(name, db)
+            return user
+        except TypeError:
+            raise HTTPException(status_code=404, detail="user not found")
     return await user_crud.gets(db)
 
 
